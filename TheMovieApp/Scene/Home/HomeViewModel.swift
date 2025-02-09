@@ -7,7 +7,7 @@ struct HomeModel {
 
 class HomeViewModel {
     var movieItems = [HomeModel]()
-    var manager = NetworkManager()
+    var manager = MovieManager()
     
     var success: (() -> Void)?
     var errorHandling: ((String) -> Void)?
@@ -20,10 +20,9 @@ class HomeViewModel {
     }
     
     func getNowPlaying() {
-        var path = MovieEndPoint.nowPlaying.path
-        manager.request(path: path, model: Movie.self) { data, error in
-            if let error {
-                self.errorHandling?(error)
+        manager.getNowPlaying { data, errorMessage in
+            if let errorMessage {
+                self.errorHandling?(errorMessage)
             } else if let data {
                 self.movieItems.append(.init(title: "Now Playing",
                                              items: data.results ?? []))
@@ -33,10 +32,9 @@ class HomeViewModel {
     }
     
     func getTopRated() {
-        var path = MovieEndPoint.topRated.path
-        manager.request(path: path, model: Movie.self) { data, error in
-            if let error {
-                self.errorHandling?(error)
+        manager.getTopRated { data, errorMessage in
+            if let errorMessage {
+                self.errorHandling?(errorMessage)
             } else if let data {
                 self.movieItems.append(.init(title: "Top Rated",
                                              items: data.results ?? []))
@@ -46,10 +44,9 @@ class HomeViewModel {
     }
     
     func getUpcoming() {
-        var path = MovieEndPoint.upcoming.path
-        manager.request(path: path, model: Movie.self) { data, error in
-            if let error {
-                self.errorHandling?(error)
+        manager.getUpcoming { data, errorMessage in
+            if let errorMessage {
+                self.errorHandling?(errorMessage)
             } else if let data {
                 self.movieItems.append(.init(title: "Upcoming",
                                              items: data.results ?? []))
@@ -59,10 +56,9 @@ class HomeViewModel {
     }
     
     func getPopular() {
-        var path = MovieEndPoint.popular.path
-        manager.request(path: path, model: Movie.self) { data, error in
-            if let error {
-                self.errorHandling?(error)
+        manager.getPopular { data, errorMessage in
+            if let errorMessage {
+                self.errorHandling?(errorMessage)
             } else if let data {
                 self.movieItems.append(.init(title: "Popular",
                                              items: data.results ?? []))
