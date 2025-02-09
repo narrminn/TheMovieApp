@@ -1,10 +1,3 @@
-//
-//  SeeAllController.swift
-//  TheMovieApp
-//
-//  Created by Narmin Alasova on 09.02.25.
-//
-
 import UIKit
 
 class SeeAllController: UIViewController {

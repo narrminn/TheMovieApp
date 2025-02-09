@@ -25,6 +25,53 @@
             </objects>
             <point key="canvasLocation" x="683.20610687022895" y="119.71830985915494"/>
         </scene>
+        <!--Actor Controller-->
+        <scene sceneID="NZJ-44-Y6b">
+            <objects>
+                <viewController storyboardIdentifier="ActorController" id="3Jp-jo-23M" customClass="ActorController" customModule="TheMovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nql-1K-3Ld">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fnw-uq-iz3">
+                                <rect key="frame" x="8" y="103" width="377" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0z8-ys-rYH">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MOs-e3-NJv">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tbU-FC-Yj9">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nZJ-0a-Kvk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fnw-uq-iz3" firstAttribute="top" secondItem="nZJ-0a-Kvk" secondAttribute="top" id="46u-zw-jBW"/>
+                            <constraint firstItem="nZJ-0a-Kvk" firstAttribute="bottom" secondItem="fnw-uq-iz3" secondAttribute="bottom" id="5vj-iX-QwZ"/>
+                            <constraint firstItem="fnw-uq-iz3" firstAttribute="leading" secondItem="nZJ-0a-Kvk" secondAttribute="leading" constant="8" id="Byw-xZ-Usd"/>
+                            <constraint firstItem="nZJ-0a-Kvk" firstAttribute="trailing" secondItem="fnw-uq-iz3" secondAttribute="trailing" constant="8" id="rcB-KV-9Xa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="P5R-Gr-dJD"/>
+                    <connections>
+                        <outlet property="collection" destination="fnw-uq-iz3" id="3ra-rT-NQX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kev-2Q-Fop" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="683" y="825"/>
+        </scene>
         <!--Home Controller-->
         <scene sceneID="FnL-d7-8nA">
             <objects>
@@ -99,11 +146,12 @@
                     <connections>
                         <segue destination="iCu-ba-1sR" kind="relationship" relationship="viewControllers" id="6xi-Su-KEH"/>
                         <segue destination="a6N-Ep-ooD" kind="relationship" relationship="viewControllers" id="oQv-OZ-SiU"/>
+                        <segue destination="8xv-gy-R3T" kind="relationship" relationship="viewControllers" id="W30-Nf-5gm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yax-sU-Q5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1148" y="-183"/>
+            <point key="canvasLocation" x="-1289" y="-11"/>
         </scene>
         <!--Home-->
         <scene sceneID="fqE-HH-01r">
@@ -143,10 +191,30 @@
             </objects>
             <point key="canvasLocation" x="-243.51145038167937" y="119.71830985915494"/>
         </scene>
+        <!--Actor-->
+        <scene sceneID="fcW-lN-9gD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8xv-gy-R3T" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Actor" image="person.fill" catalog="system" id="8A0-Fs-LmN"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UaX-oR-pZ7">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3Jp-jo-23M" kind="relationship" relationship="rootViewController" id="voy-dp-USl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CNC-Tt-qUb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-245" y="825"/>
+        </scene>
     </scenes>
     <resources>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

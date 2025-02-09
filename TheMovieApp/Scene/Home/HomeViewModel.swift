@@ -20,7 +20,8 @@ class HomeViewModel {
     }
     
     func getNowPlaying() {
-        manager.request(endpoint: .nowPlaying, model: Movie.self) { data, error in
+        var path = MovieEndPoint.nowPlaying.path
+        manager.request(path: path, model: Movie.self) { data, error in
             if let error {
                 self.errorHandling?(error)
             } else if let data {
@@ -32,7 +33,8 @@ class HomeViewModel {
     }
     
     func getTopRated() {
-        manager.request(endpoint: .topRated, model: Movie.self) { data, error in
+        var path = MovieEndPoint.topRated.path
+        manager.request(path: path, model: Movie.self) { data, error in
             if let error {
                 self.errorHandling?(error)
             } else if let data {
@@ -44,7 +46,8 @@ class HomeViewModel {
     }
     
     func getUpcoming() {
-        manager.request(endpoint: .upcoming, model: Movie.self) { data, error in
+        var path = MovieEndPoint.upcoming.path
+        manager.request(path: path, model: Movie.self) { data, error in
             if let error {
                 self.errorHandling?(error)
             } else if let data {
@@ -56,7 +59,8 @@ class HomeViewModel {
     }
     
     func getPopular() {
-        manager.request(endpoint: .popular, model: Movie.self) { data, error in
+        var path = MovieEndPoint.popular.path
+        manager.request(path: path, model: Movie.self) { data, error in
             if let error {
                 self.errorHandling?(error)
             } else if let data {

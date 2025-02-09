@@ -51,7 +51,7 @@ class HomeCell: UICollectionViewCell {
         collection.dataSource = self
         collection.delegate = self
         
-        collection.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
+        collection.register(ImageLabelCell.self, forCellWithReuseIdentifier: "ImageLabelCell")
     }
     
     func configure(title: String, data: [MovieResult]) {
@@ -89,8 +89,8 @@ extension HomeCell: UICollectionViewDataSource, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageLabelCell", for: indexPath) as! ImageLabelCell
+        cell.configure(data: data[indexPath.item])
         return cell
     }
     

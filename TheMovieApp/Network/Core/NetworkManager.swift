@@ -2,14 +2,14 @@ import Foundation
 import Alamofire
 
 class NetworkManager {
-    func request<T: Codable>(endpoint: Endpoint,
+    func request<T: Codable>(path: String,
                              model: T.Type,
                              method: HTTPMethod = .get,
                              params: Parameters? = nil,
                              encodingType: EncodingType = .url,
 //                             header: HTTPHeaders? = nil,
                              completion: @escaping((T?, String?) -> Void)) {
-        AF.request("\(NetworkHelper.shared.baseURL)/\(endpoint.rawValue)",
+        AF.request(path,
                    method: method,
                    parameters: params,
                    encoding: encodingType == .url ? URLEncoding.default : JSONEncoding.default,

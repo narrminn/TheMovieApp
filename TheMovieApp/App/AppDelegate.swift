@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  TheMovieApp
-//
-//  Created by Narmin Alasova on 08.02.25.
-//
-
 import UIKit
 
 @main
