@@ -48,6 +48,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, 
             self.navigationController?.show(controller, sender: nil)
         }
         
+        cell.detailCallBack = { id in
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "\(MovieDetailController.self)") as! MovieDetailController
+            controller.configure(id: id)
+            
+            self.navigationController?.show(controller, sender: nil)
+        }
+        
         return cell
     }
     

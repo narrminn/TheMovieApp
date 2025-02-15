@@ -5,6 +5,7 @@ protocol MovieManagerUseCase {
     func getPopular(completion: @escaping((Movie?, String?) -> Void))
     func getTopRated(completion: @escaping((Movie?, String?) -> Void))
     func getUpcoming(completion: @escaping((Movie?, String?) -> Void))
+    func getDetail(id: Int, completion: @escaping((MovieDetail?, String?) -> Void))
 }
 
 class MovieManager: MovieManagerUseCase {
@@ -25,6 +26,10 @@ class MovieManager: MovieManagerUseCase {
     func getUpcoming(completion: @escaping((Movie?, String?) -> Void)) {
         let path = MovieEndPoint.upcoming.path
         manager.request(path: path, model: Movie.self, completion: completion)
+    }
+    func getDetail(id: Int, completion: @escaping((MovieDetail?, String?) -> Void)) {
+        let path = MovieEndPoint.movieDetails(id: id).path
+        manager.request(path: path, model: MovieDetail.self, completion: completion)
     }
 }
 

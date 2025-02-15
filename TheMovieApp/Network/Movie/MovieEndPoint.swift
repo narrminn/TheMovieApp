@@ -5,6 +5,7 @@ enum MovieEndPoint {
     case popular
     case topRated
     case upcoming
+    case movieDetails(id: Int)
     
     var path: String {
         switch self {
@@ -16,6 +17,9 @@ enum MovieEndPoint {
             return NetworkHelper.shared.configureURL(endpoint: "movie/top_rated")
         case .upcoming:
             return NetworkHelper.shared.configureURL(endpoint: "movie/upcoming")
+        case .movieDetails(let id):
+            return NetworkHelper.shared.configureURL(endpoint: "movie/\(id)")
         }
+        
     }
 }

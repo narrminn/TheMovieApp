@@ -1,15 +1,16 @@
 import UIKit
 
-class ActorController: UIViewController {
+class ActorMovieController: UIViewController {
     @IBOutlet weak var collection: UICollectionView!
     
-    private var viewModel = ActorViewModel()
+    var viewModel = ActorMovieViewModel()
+    var actorId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureViewModel()
         configureUI()
+        configureViewModel()
     }
     
     fileprivate func configureUI() {
@@ -19,11 +20,12 @@ class ActorController: UIViewController {
         collection.register(ImageLabelCell.self, forCellWithReuseIdentifier: "ImageLabelCell")
     }
     
-    func configureViewModel() {
-        navigationItem.title = "Actors"
-        
-        viewModel.getActors()
-        
+    func configure(actorId: Int) {
+        self.actorId = actorId
+        viewModel.getActorMovies(actorId: actorId)
+    }
+    
+    fileprivate func configureViewModel() {
         viewModel.success = {
             self.collection.reloadData()
         }
@@ -32,27 +34,35 @@ class ActorController: UIViewController {
             print(error)
         }
     }
+    
+    func configureNav(name: String) {
+        navigationItem.title = "\(name) movies"
+    }
 }
 
-extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension ActorMovieController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.actors.count
+        viewModel.movies?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageLabelCell", for: indexPath) as! ImageLabelCell
-        cell.configure(data: viewModel.actors[indexPath.row])
+        
+        if let movie = viewModel.movies?[indexPath.row] {
+            cell.configure(data: movie)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: (collectionView.frame.width - 40) / 2, height: 220)
+        .init(width: (collectionView.frame.width - 40) / 2, height: 280)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = storyboard?.instantiateViewController(identifier: "\(ActorMovieController.self)") as! ActorMovieController
-        controller.configure(actorId: viewModel.actors[indexPath.row].id ?? 0)
-        controller.configureNav(name: viewModel.actors[indexPath.row].name ?? "")
+        let controller = storyboard?.instantiateViewController(identifier: "\(MovieDetailController.self)") as! MovieDetailController
+        if let movieId = viewModel.movies?[indexPath.row].id {
+            controller.configure(id: movieId)
+        }
         navigationController?.show(controller, sender: nil)
     }
 }
