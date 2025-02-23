@@ -36,7 +36,7 @@ class ImageLabelCell: UICollectionViewCell {
     }
     
     fileprivate func configureConstraints() {
-        addSubview(titleLabel)
+        addSubview(titleLabel)  //foeach
         addSubview(movieImage)
         
         NSLayoutConstraint.activate([

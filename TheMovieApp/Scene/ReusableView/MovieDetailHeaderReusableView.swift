@@ -6,16 +6,13 @@ class MovieDetailHeaderReusableView: UICollectionReusableView {
     @IBOutlet weak var language: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var imdb: UILabel!
-    @IBOutlet weak var segment: UISegmentedControl!
-    
-    private var lastSelectedSegmentIndex: Int = 0
-    var segmentChangedAction: ((Int) -> Void)?
+    @IBOutlet weak var about: UILabel!
+    @IBOutlet weak var genres: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         configureUI()
-        setupSegment()
     }
     
     func configureUI() {
@@ -28,6 +25,15 @@ class MovieDetailHeaderReusableView: UICollectionReusableView {
     
     func configure(movie: MovieDetail) {
         title.text = movie.originalTitle
+        about.text = movie.overview
+        
+        var genresString = ""
+        
+        movie.genres?.forEach { genre in
+            genresString = genresString + (genre.name ?? "") + ", "
+        }
+        
+        genres.text = genresString
         
 //        if let spokenLanguages = movie.spokenLanguages {
 //            language.text = spokenLanguages[0].englishName ?? ""
@@ -36,8 +42,8 @@ class MovieDetailHeaderReusableView: UICollectionReusableView {
         language.text = movie.spokenLanguages?.first?.englishName ?? ""
         imdb.text = String(format: "%.1f", movie.voteAverage ?? 0) + "/10"
         
-        var hour = Int(movie.runtime ?? 0) / 60
-        var minute = Int(movie.runtime ?? 0) % 60
+        let hour = Int(movie.runtime ?? 0) / 60
+        let minute = Int(movie.runtime ?? 0) % 60
         
         time.text = hour > 0 ? "\(hour) h \(minute) min" : "\(minute) min"
         
@@ -45,25 +51,4 @@ class MovieDetailHeaderReusableView: UICollectionReusableView {
             image.loadImage(url: posterPath)
         }
     }
-    
-    func setupSegment() {
-        guard let segment = segment else { return }
-        
-        segment.removeAllSegments()
-        
-        for detailSegment in DetailSegment.allCases {
-            segment.insertSegment(withTitle: detailSegment.rawValue, at: segment.numberOfSegments, animated: false)
-        }
-        
-        segment.selectedSegmentIndex = lastSelectedSegmentIndex
-        segment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        segment.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
-    }
-    
-    @IBAction func segmentChanged(_ sender: Any) {
-        lastSelectedSegmentIndex = segment.selectedSegmentIndex
-        
-        segmentChangedAction?(lastSelectedSegmentIndex)
-    }
-    
 }

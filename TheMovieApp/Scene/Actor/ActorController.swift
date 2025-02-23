@@ -5,6 +5,8 @@ class ActorController: UIViewController {
     
     private var viewModel = ActorViewModel()
     
+    let refreshController = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,6 +18,8 @@ class ActorController: UIViewController {
         collection.dataSource = self
         collection.delegate = self
         
+        refreshController.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        collection.refreshControl = refreshController
         collection.register(ImageLabelCell.self, forCellWithReuseIdentifier: "ImageLabelCell")
     }
     
@@ -26,11 +30,17 @@ class ActorController: UIViewController {
         
         viewModel.success = {
             self.collection.reloadData()
+            self.refreshController.endRefreshing()
         }
         
         viewModel.errorHandling = { error in
             print(error)
+            self.refreshController.endRefreshing()
         }
+    }
+    
+    @objc func pullToRefresh() {
+        viewModel.getActors()
     }
 }
 
