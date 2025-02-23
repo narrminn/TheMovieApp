@@ -40,6 +40,8 @@ class ActorController: UIViewController {
     }
     
     @objc func pullToRefresh() {
+        viewModel.reset()
+        collection.reloadData()
         viewModel.getActors()
     }
 }
@@ -64,5 +66,9 @@ extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate,
         controller.configure(actorId: viewModel.actors[indexPath.row].id ?? 0)
         controller.configureNav(name: viewModel.actors[indexPath.row].name ?? "")
         navigationController?.show(controller, sender: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        viewModel.pagination(index: indexPath.row)
     }
 }

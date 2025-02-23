@@ -16,6 +16,8 @@ class DetailCell: UICollectionViewCell {
     
     var similarMovies: [SimilarMovieResult] = []
     
+    var detailCallBack: ((Int) -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -60,6 +62,12 @@ extension DetailCell: UICollectionViewDataSource, UICollectionViewDelegate, UICo
         
         cell.configure(data: similarMovies[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let movieId = similarMovies[indexPath.row].id {
+            detailCallBack?(movieId)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
