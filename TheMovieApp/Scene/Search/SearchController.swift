@@ -6,6 +6,8 @@ class SearchController: UIViewController {
     
     private var viewModel = SearchViewModel()
     
+    let refreshController = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,6 +19,8 @@ class SearchController: UIViewController {
         collection.dataSource = self
         collection.delegate = self
         
+        refreshController.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        collection.refreshControl = refreshController
         collection.register(ImageLabelCell.self, forCellWithReuseIdentifier: "ImageLabelCell")
     }
     
@@ -25,13 +29,23 @@ class SearchController: UIViewController {
     }
     
     fileprivate func configureViewModel() {
+        navigationItem.title = "Search"
+        
         viewModel.success = {
             self.collection.reloadData()
+            self.refreshController.endRefreshing()
         }
         
         viewModel.errorHandling = { error in
             print(error)
+            self.refreshController.endRefreshing()
         }
+    }
+    
+    @objc func pullToRefresh() {
+        viewModel.reset()
+        collection.reloadData()
+        viewModel.movieSearch(query: searchTextField.text ?? "")
     }
 }
 

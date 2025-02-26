@@ -31,6 +31,8 @@ class MovieDetailController: UIViewController {
     }
     
     fileprivate func configureViewModel() {
+        navigationItem.title = "Movie Details"
+        
         viewModel.success = {
             self.collection.reloadData()
         }

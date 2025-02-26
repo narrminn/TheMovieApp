@@ -20,6 +20,7 @@ class ActorController: UIViewController {
         
         refreshController.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collection.refreshControl = refreshController
+        
         collection.register(ImageLabelCell.self, forCellWithReuseIdentifier: "ImageLabelCell")
     }
     

@@ -17,4 +17,8 @@ class ActorMovieViewModel {
             }
         }
     }
+    
+    func reset() {
+        movies = []
+    }
 }

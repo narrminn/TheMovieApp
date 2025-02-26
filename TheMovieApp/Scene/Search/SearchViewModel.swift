@@ -26,4 +26,9 @@ class SearchViewModel {
             movieSearch(query: query)
         }
     }
+    
+    func reset() {
+        movies = []
+        searchResponse = nil
+    }
 }

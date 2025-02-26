@@ -6,6 +6,8 @@ class ActorMovieController: UIViewController {
     var viewModel = ActorMovieViewModel()
     var actorId: Int?
     
+    let refreshController = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,6 +18,9 @@ class ActorMovieController: UIViewController {
     fileprivate func configureUI() {
         collection.dataSource = self
         collection.delegate = self
+        
+        refreshController.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        collection.refreshControl = refreshController
         
         collection.register(ImageLabelCell.self, forCellWithReuseIdentifier: "ImageLabelCell")
     }
@@ -28,15 +33,23 @@ class ActorMovieController: UIViewController {
     fileprivate func configureViewModel() {
         viewModel.success = {
             self.collection.reloadData()
+            self.refreshController.endRefreshing()
         }
         
         viewModel.errorHandling = { error in
             print(error)
+            self.refreshController.endRefreshing()
         }
     }
     
     func configureNav(name: String) {
         navigationItem.title = "\(name) movies"
+    }
+    
+    @objc func pullToRefresh() {
+        viewModel.reset()
+        collection.reloadData()
+        viewModel.getActorMovies(actorId: actorId ?? 0)
     }
 }
 
