@@ -45,16 +45,21 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, 
 //            let controller = self.storyboard?.instantiateViewController(identifier: "\(SeeAllController.self)") as! SeeAllController
             //controller.configure(movies: self.viewModel.movieItems[indexPath.row].items ?? [])
             
-            let controller = SeeAllController(viewModel: .init(model: self.viewModel.movieItems[indexPath.row], usecase: self.viewModel.manager))
+//            let controller = SeeAllController(viewModel: .init(model: self.viewModel.movieItems[indexPath.row], usecase: self.viewModel.manager))
+//            
+//            self.navigationController?.show(controller, sender: nil)
             
-            self.navigationController?.show(controller, sender: nil)
+            let coordinator = SeeAllCoordinator(model: self.viewModel.movieItems[indexPath.row],
+                                                usecase: self.viewModel.manager,
+                                                navigationController: self.navigationController ?? UINavigationController())
+            
+            coordinator.start()
         }
         
         cell.detailCallBack = { id in
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "\(MovieDetailController.self)") as! MovieDetailController
-            controller.configure(id: id)
+            let coordinator = MovieDetailCoordinator(movieId: id, navigationController: self.navigationController ?? UINavigationController())
             
-            self.navigationController?.show(controller, sender: nil)
+            coordinator.start()
         }
         
         return cell

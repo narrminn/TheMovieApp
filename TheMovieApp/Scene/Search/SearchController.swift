@@ -61,11 +61,17 @@ extension SearchController: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = storyboard?.instantiateViewController(identifier: "\(MovieDetailController.self)") as! MovieDetailController
+//        let controller = storyboard?.instantiateViewController(identifier: "\(MovieDetailController.self)") as! MovieDetailController
+//        if let movieId = viewModel.movies[indexPath.row].id {
+//            controller.configure(id: movieId)
+//        }
+//        navigationController?.show(controller, sender: nil)
+        
         if let movieId = viewModel.movies[indexPath.row].id {
-            controller.configure(id: movieId)
+            let coordinator = MovieDetailCoordinator(movieId: movieId, navigationController: self.navigationController ?? UINavigationController())
+            
+            coordinator.start()
         }
-        navigationController?.show(controller, sender: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

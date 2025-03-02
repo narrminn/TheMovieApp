@@ -63,10 +63,17 @@ extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = storyboard?.instantiateViewController(identifier: "\(ActorMovieController.self)") as! ActorMovieController
-        controller.configure(actorId: viewModel.actors[indexPath.row].id ?? 0)
-        controller.configureNav(name: viewModel.actors[indexPath.row].name ?? "")
-        navigationController?.show(controller, sender: nil)
+//        let controller = storyboard?.instantiateViewController(identifier: "\(ActorMovieController.self)") as! ActorMovieController
+//        controller.configure(actorId: viewModel.actors[indexPath.row].id ?? 0)
+//        controller.configureNav(name: viewModel.actors[indexPath.row].name ?? "")
+//        navigationController?.show(controller, sender: nil)
+        
+        if let actorId = viewModel.actors[indexPath.row].id,
+           let name = viewModel.actors[indexPath.row].name {
+            let coordinator = ActorMovieCoordinator(actorId: actorId, name: name, navigationController: self.navigationController ?? UINavigationController())
+            
+            coordinator.start()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

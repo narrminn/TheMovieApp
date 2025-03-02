@@ -78,11 +78,15 @@ extension SeeAllController: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = storyboard?.instantiateViewController(identifier: "\(MovieDetailController.self)") as! MovieDetailController
-        
-        controller.configure(id: viewModel.model.items[indexPath.row].id ?? 0)
-        
-        navigationController?.show(controller, sender: self)
+//        let controller = storyboard?.instantiateViewController(identifier: "\(MovieDetailController.self)") as! MovieDetailController
+//        controller.configure(id: viewModel.model.items[indexPath.row].id ?? 0)
+//        
+//        navigationController?.show(controller, sender: self)
+        if let movieId = viewModel.model.items[indexPath.row].id {
+            let coordinator = MovieDetailCoordinator(movieId: movieId, navigationController: self.navigationController ?? UINavigationController())
+            
+            coordinator.start()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

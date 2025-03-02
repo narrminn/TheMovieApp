@@ -52,10 +52,14 @@ extension MovieDetailController: UICollectionViewDataSource, UICollectionViewDel
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailCell", for: indexPath) as! DetailCell
         cell.configure(similarMovies: viewModel.similarMovies)
         cell.detailCallBack = { id in
-            let controller = self.storyboard?.instantiateViewController(identifier: "\(MovieDetailController.self)") as! MovieDetailController
+//            let controller = self.storyboard?.instantiateViewController(identifier: "\(MovieDetailController.self)") as! MovieDetailController
+//            
+//            controller.configure(id: id)
+//            self.navigationController?.show(controller, sender: nil)
             
-            controller.configure(id: id)
-            self.navigationController?.show(controller, sender: nil)
+            let coordinator = MovieDetailCoordinator(movieId: id, navigationController: self.navigationController ?? UINavigationController())
+            
+            coordinator.start()
         }
         return cell
     }

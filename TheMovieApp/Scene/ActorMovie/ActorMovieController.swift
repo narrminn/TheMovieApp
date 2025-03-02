@@ -72,10 +72,10 @@ extension ActorMovieController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = storyboard?.instantiateViewController(identifier: "\(MovieDetailController.self)") as! MovieDetailController
         if let movieId = viewModel.movies?[indexPath.row].id {
-            controller.configure(id: movieId)
+            let coordinator = MovieDetailCoordinator(movieId: movieId, navigationController: self.navigationController ?? UINavigationController())
+            
+            coordinator.start()
         }
-        navigationController?.show(controller, sender: nil)
     }
 }
