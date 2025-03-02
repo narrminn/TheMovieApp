@@ -1,11 +1,20 @@
 import Foundation
 
+enum HomeSectionTitle: String {
+    case popular = "Popular"
+    case upcoming = "Upcoming"
+    case toprated = "Top Rated"
+    case nowplaying = "Now Playing"
+}
+
 struct HomeModel {
-    var title: String
-    var items: [MovieResult]?
+    var title: HomeSectionTitle
+    var items: [MovieResult]
+    var endpoint: MovieEndPoint
 }
 
 class HomeViewModel {
+    var movieResponse: Movie?
     var movieItems = [HomeModel]()
     var manager = MovieManager()
     
@@ -20,48 +29,56 @@ class HomeViewModel {
     }
     
     func getNowPlaying() {
-        manager.getNowPlaying { data, errorMessage in
+        manager.getMovieList(page: (movieResponse?.page ?? 0) + 1, endpoint: .nowPlaying) { data, errorMessage in
             if let errorMessage {
                 self.errorHandling?(errorMessage)
             } else if let data {
-                self.movieItems.append(.init(title: "Now Playing",
-                                             items: data.results ?? []))
+                self.movieResponse = data
+                self.movieItems.append(.init(title: .nowplaying,
+                                             items: data.results ?? [],
+                                             endpoint: .nowPlaying))
                 self.success?()
             }
         }
     }
     
     func getTopRated() {
-        manager.getTopRated { data, errorMessage in
+        manager.getMovieList(page: (movieResponse?.page ?? 0) + 1, endpoint: .topRated) { data, errorMessage in
             if let errorMessage {
                 self.errorHandling?(errorMessage)
             } else if let data {
-                self.movieItems.append(.init(title: "Top Rated",
-                                             items: data.results ?? []))
+                self.movieResponse = data
+                self.movieItems.append(.init(title: .toprated,
+                                             items: data.results ?? [],
+                                             endpoint: .topRated))
                 self.success?()
             }
         }
     }
     
     func getUpcoming() {
-        manager.getUpcoming { data, errorMessage in
+        manager.getMovieList(page: (movieResponse?.page ?? 0) + 1, endpoint: .upcoming) { data, errorMessage in
             if let errorMessage {
                 self.errorHandling?(errorMessage)
             } else if let data {
-                self.movieItems.append(.init(title: "Upcoming",
-                                             items: data.results ?? []))
+                self.movieResponse = data
+                self.movieItems.append(.init(title: .upcoming,
+                                             items: data.results ?? [],
+                                             endpoint: .upcoming))
                 self.success?()
             }
         }
     }
     
     func getPopular() {
-        manager.getPopular { data, errorMessage in
+        manager.getMovieList(page: (movieResponse?.page ?? 0) + 1, endpoint: .popular) { data, errorMessage in
             if let errorMessage {
                 self.errorHandling?(errorMessage)
             } else if let data {
-                self.movieItems.append(.init(title: "Popular",
-                                             items: data.results ?? []))
+                self.movieResponse = data
+                self.movieItems.append(.init(title: .popular,
+                                             items: data.results ?? [],
+                                             endpoint: .popular))
                 self.success?()
             }
         }

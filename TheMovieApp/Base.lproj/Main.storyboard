@@ -239,10 +239,10 @@
             </objects>
             <point key="canvasLocation" x="681.67938931297704" y="-578.16901408450713"/>
         </scene>
-        <!--See All Controller-->
+        <!--View Controller-->
         <scene sceneID="Kjh-m3-fmV">
             <objects>
-                <viewController storyboardIdentifier="SeeAllController" id="35c-k9-zhr" customClass="SeeAllController" customModule="TheMovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SeeAllController" id="35c-k9-zhr" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y5M-8u-0eO">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -277,9 +277,6 @@
                             <constraint firstItem="TzT-Vz-4Xo" firstAttribute="bottom" secondItem="yQJ-N6-u0k" secondAttribute="bottom" id="Fws-n1-XrB"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="collection" destination="yQJ-N6-u0k" id="cEA-sl-K4U"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jv9-J3-Z31" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -330,6 +327,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IBr-MF-fc9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2213" y="-578"/>
+        </scene>
+        <!--Auth Controller-->
+        <scene sceneID="vYm-G4-dPa">
+            <objects>
+                <viewController storyboardIdentifier="AuthController" id="F2r-R8-TdX" customClass="AuthController" customModule="TheMovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jm2-iB-ge4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="laI-Wb-SL1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JOv-XF-hsU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2475" y="-10"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="jOM-dH-yz8">

@@ -1,6 +1,7 @@
 import Foundation
 
 protocol MovieManagerUseCase {
+    func getMovieList(page: Int, endpoint: MovieEndPoint, completion: @escaping((Movie?, String?) -> Void))
     func getNowPlaying(completion: @escaping((Movie?, String?) -> Void))
     func getPopular(completion: @escaping((Movie?, String?) -> Void))
     func getTopRated(completion: @escaping((Movie?, String?) -> Void))
@@ -12,6 +13,26 @@ protocol MovieManagerUseCase {
 
 class MovieManager: MovieManagerUseCase {
     var manager = NetworkManager()
+    
+    func getMovieList(page: Int, endpoint: MovieEndPoint, completion: @escaping((Movie?, String?) -> Void)) {
+        var path = ""
+        switch endpoint {
+        case .nowPlaying:
+            path = MovieEndPoint.nowPlaying.path
+        case .popular:
+            path = MovieEndPoint.popular.path
+        case .topRated:
+            path = MovieEndPoint.topRated.path
+        case .upcoming:
+            path = MovieEndPoint.upcoming.path
+        default:
+            path = ""
+        }
+        
+        let params = ["page" : page]
+        
+        manager.request(path: path, model: Movie.self, params: params, completion: completion)
+    }
     
     func getNowPlaying(completion: @escaping((Movie?, String?) -> Void)) {
         let path = MovieEndPoint.nowPlaying.path

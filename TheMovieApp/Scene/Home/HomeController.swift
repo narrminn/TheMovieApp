@@ -40,10 +40,12 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as! HomeCell
         
-        cell.configure(title: viewModel.movieItems[indexPath.row].title, data: viewModel.movieItems[indexPath.row].items ?? [])
+        cell.configure(title: viewModel.movieItems[indexPath.row].title.rawValue, data: viewModel.movieItems[indexPath.row].items)
         cell.seeAllCallBack = {
-            let controller = self.storyboard?.instantiateViewController(identifier: "\(SeeAllController.self)") as! SeeAllController
-            controller.configure(movies: self.viewModel.movieItems[indexPath.row].items ?? [])
+//            let controller = self.storyboard?.instantiateViewController(identifier: "\(SeeAllController.self)") as! SeeAllController
+            //controller.configure(movies: self.viewModel.movieItems[indexPath.row].items ?? [])
+            
+            let controller = SeeAllController(viewModel: .init(model: self.viewModel.movieItems[indexPath.row], usecase: self.viewModel.manager))
             
             self.navigationController?.show(controller, sender: nil)
         }
