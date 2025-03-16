@@ -11,7 +11,7 @@ class MovieDetailCoordinator: Coordinator {
     }
     
     func start() {
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(MovieDetailController.self)") as! MovieDetailController
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(MovieDetailV2Controller.self)") as! MovieDetailV2Controller
         controller.configure(id: movieId)
         
         self.navigationController.show(controller, sender: nil)

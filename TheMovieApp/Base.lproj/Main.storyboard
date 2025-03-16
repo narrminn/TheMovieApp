@@ -328,25 +328,50 @@
             </objects>
             <point key="canvasLocation" x="2213" y="-578"/>
         </scene>
-        <!--Auth Controller-->
-        <scene sceneID="vYm-G4-dPa">
+        <!--Movie DetailV2 Controller-->
+        <scene sceneID="F2f-Fr-peN">
             <objects>
-                <viewController storyboardIdentifier="AuthController" id="F2r-R8-TdX" customClass="AuthController" customModule="TheMovieApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jm2-iB-ge4">
+                <viewController storyboardIdentifier="MovieDetailV2Controller" id="PcC-mQ-KIL" customClass="MovieDetailV2Controller" customModule="TheMovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M7Z-Tq-can">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="laI-Wb-SL1"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6QB-o4-wWe">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="c5W-k9-JIV">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c5W-k9-JIV" id="3zM-49-hgM">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yEn-Pm-vM8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yEn-Pm-vM8" firstAttribute="trailing" secondItem="6QB-o4-wWe" secondAttribute="trailing" id="1ZY-Oc-0rj"/>
+                            <constraint firstItem="6QB-o4-wWe" firstAttribute="leading" secondItem="yEn-Pm-vM8" secondAttribute="leading" id="8BK-2s-B8z"/>
+                            <constraint firstItem="yEn-Pm-vM8" firstAttribute="bottom" secondItem="6QB-o4-wWe" secondAttribute="bottom" id="UdJ-5N-mMk"/>
+                            <constraint firstItem="6QB-o4-wWe" firstAttribute="top" secondItem="yEn-Pm-vM8" secondAttribute="top" id="mQp-7r-nLs"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="table" destination="6QB-o4-wWe" id="6W7-gs-gGj"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JOv-XF-hsU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kX9-X9-mGE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2475" y="-10"/>
+            <point key="canvasLocation" x="3115" y="-578"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="jOM-dH-yz8">
             <objects>
-                <tabBarController id="tzP-mW-nj3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tzP-mW-nj3" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BlU-Bl-wXJ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
